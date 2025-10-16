@@ -11,14 +11,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.kuali_app.navigation.AppNavigation
+import com.example.kuali_app.navigation.AppScreens
 import com.example.kuali_app.screens.MainScreen
+import com.example.kuali_app.screens.SplashScreen
 
 class MainActivity : androidx.activity.ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen()
+            AppNavigation()
         }
     }
 }

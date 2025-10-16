@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     implementation("androidx.compose.material3:material3:1.3.0")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+// Use the latest stable version
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
