@@ -52,8 +52,8 @@ fun MainScreen(modifier: Modifier = Modifier,viewModel: MainViewModel = viewMode
 
     val navItemList = listOf(
         NavItem("Home", painterResource(R.drawable.ic_home)),
+        NavItem("Products", painterResource(R.drawable.ic_supermarket_products)),
         NavItem("Recipes", painterResource(R.drawable.ic_recipes)),
-        NavItem("Statistics", painterResource(R.drawable.ic_statistics)),
         NavItem("My Chef", painterResource(R.drawable.ic_chef)),
     )
 
@@ -103,7 +103,7 @@ fun MainScreen(modifier: Modifier = Modifier,viewModel: MainViewModel = viewMode
                     selected = viewModel.selectedIndex == 1,
                     onClick = { viewModel.updateIndex(1) },
                     icon = {
-                        Icon(navItemList[1].icon, "Icon", Modifier.size(24.dp))
+                        Icon(navItemList[1].icon, "Icon", Modifier.size(28.dp))
                     },
                     label = {
                         Text(
@@ -188,8 +188,8 @@ fun MainScreen(modifier: Modifier = Modifier,viewModel: MainViewModel = viewMode
 fun ContentScreen(modifier: Modifier = Modifier, page:Int) {
     when (page) {
         0 -> HomeScreen()
-        1 -> RecipesScreen()
-        2 -> StatisticsScreen()
+        1 -> ProductsScreen()
+        2 -> RecipesScreen()
         3 -> ChefScreen()
     }
 
