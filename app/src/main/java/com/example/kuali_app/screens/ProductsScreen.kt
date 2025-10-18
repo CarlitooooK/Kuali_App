@@ -13,14 +13,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,14 +46,19 @@ import coil.compose.AsyncImage
 import com.example.kuali_app.components.ProductCard
 import com.example.kuali_app.ui.theme.GilroyFont
 import com.example.kuali_app.viewmodel.ProductViewModel
+import retrofit2.http.Query
 
 @Composable
 fun ProductsScreen(viewModel: ProductViewModel = viewModel()) {
     val products by viewModel.products.collectAsState()
+    var query by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier
-        .fillMaxSize().background(Color.White)
-        .padding(16.dp)) {
+    Column(
+        Modifier.fillMaxSize()
+            .background(Color.White),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
         Text(
             "Find your products",
             fontWeight = FontWeight.Bold,
@@ -53,14 +67,21 @@ fun ProductsScreen(viewModel: ProductViewModel = viewModel()) {
             modifier = Modifier.padding(top = 50.dp)
         )
 
+        SearchBarOutlined(
+            query
+        ) { query = it }
+        Spacer(Modifier.height(10.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             Modifier
-                .fillMaxWidth(),
+                .fillMaxSize()
+                .background(Color.White),
             contentPadding = PaddingValues(20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+
+
             items(products) { product ->
                 Card(
                     Modifier
@@ -99,6 +120,22 @@ fun ProductsScreen(viewModel: ProductViewModel = viewModel()) {
             }
         }
     }
+}
+
+@Composable
+fun SearchBarOutlined(query: String, onQueryChange: (String) -> Unit) {
+    OutlinedTextField(
+        value = query,
+        onValueChange = onQueryChange,
+        placeholder = { Text("Search products") },
+        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "") },
+        singleLine = true,
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    )
+
 }
 
 @Preview(showBackground = true, showSystemUi = true)
